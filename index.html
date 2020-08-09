@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <title>SINoALICE Experience Calculator</title>
+
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="navbar navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">SINoALICE Experience Calculator</a>
+  </div>
+  <div class="container mt-4">
+    <form id="experience-form">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="">Current EXP</label>
+            <input id="current-experience" type="number" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="">Max EXP</label>
+            <input id="max-experience" type="number" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="ap">Current AP</label>
+            <input id="ap" type="number" class="form-control">
+          </div>
+        </div>
+        <div class="col-2">
+          <input class="btn btn-primary btn-block" style="margin-top: 32px;" type="submit" value="Submit">
+        </div> 
+      </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Mission</th>
+          <th>EXP Ratio</th>
+          <th>Remaining EXP</th>
+          <th>Remaining AP</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Source: https://docs.google.com/spreadsheets/d/1e6VSsgWy2vJElQ26yVIOZy9NtxndW68he5AyAuBploU/edit#gid=979660036 -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="/assets/js/script.js"></script>
+</body>
+</html>

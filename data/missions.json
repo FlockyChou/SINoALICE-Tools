@@ -1,0 +1,52 @@
+[
+  {
+    "act": 1,
+    "act_difficulty": "Normal",
+    "chapter": 1,
+    "ap_cost": 6,
+    "experience_earned": 6,
+    "gold_earned": 600,
+    "experience_ratio": 1,
+    "gold_ratio": 100
+  },
+  {
+    "act": 1,
+    "act_difficulty": "Normal",
+    "chapter": 2,
+    "ap_cost": 8,
+    "experience_earned": 16,
+    "gold_earned": 880,
+    "experience_ratio": 2,
+    "gold_ratio": 110
+  },
+  {
+    "act": 1,
+    "act_difficulty": "Normal",
+    "chapter": 3,
+    "ap_cost": 10,
+    "experience_earned": 24,
+    "gold_earned": 1200,
+    "experience_ratio": 2.4,
+    "gold_ratio": 120
+  },
+  {
+    "act": 1,
+    "act_difficulty": "Normal",
+    "chapter": 4,
+    "ap_cost": 13,
+    "experience_earned": 38,
+    "gold_earned": 1560,
+    "experience_ratio": 2.92,
+    "gold_ratio": 120
+  },
+  {
+    "act": 1,
+    "act_difficulty": "Normal",
+    "chapter": 5,
+    "ap_cost": 16,
+    "experience_earned": 54,
+    "gold_earned": 2080,
+    "experience_ratio": 3.38,
+    "gold_ratio": 130
+  }
+]
