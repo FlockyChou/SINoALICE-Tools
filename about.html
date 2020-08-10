@@ -18,7 +18,7 @@
 
     <div id="navbar-menu" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="/about.html">About</a>
         </li>
         <li class="nav-item">
@@ -28,46 +28,27 @@
     </div>
   </nav>
   <div class="container mt-4">
-    <div class="alert alert-info">
-      <strong>Note:</strong> This calculator works better with smaller AP numbers. The logic is also crap so take this with a grain of salt.
-    </div>
-    <form id="experience-form">
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="">Current EXP</label>
-            <input id="current-experience" type="number" class="form-control" required>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label for="">Max EXP</label>
-            <input id="max-experience" type="number" class="form-control" required>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label for="ap">Current AP</label>
-            <input id="ap" type="number" class="form-control" min="6" required>
-          </div>
-        </div>
-        <div class="col-2">
-          <input class="btn btn-primary btn-block" style="margin-top: 32px;" type="submit" value="Submit">
-        </div> 
+    <div class="card">
+      <div class="card-header">
+        Sources
       </div>
-    </form>
-
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Mission</th>
-          <th>EXP Ratio</th>
-          <th>Remaining EXP</th>
-          <th>Remaining AP</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+      <div class="card-body">
+        Source for Chapter EXP Data: <a href="https://docs.google.com/spreadsheets/d/1e6VSsgWy2vJElQ26yVIOZy9NtxndW68he5AyAuBploU/edit#gid=979660036">Yumedere's SINoALICE Archives</a>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header">
+        Logic
+      </div>
+      <div class="card-body">
+        <p>
+          Basically, this tools takes in EXP needed to level up and your AP remaining and calculates an EXP/AP ratio. Then it looks through all the Story chapters to see if there is a chapter with a similar (but less than) ratio. It then repeats this process based on the new ratio until it can no longer do that. Finally, it recommends the largest chapter you can possibly do to level up.
+        </p>
+        <p>
+          Long story short, it's really bad and you should not use this tool.
+        </p>
+      </div>
+    </div>
   </div>
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

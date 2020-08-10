@@ -1,14 +1,13 @@
 $(function() {
-  const min_ap = 6;
+  let chapters;
+  let reverse_chapters;
 
-  let missions;
-
-  $.getJSON('/data/missions.json', function(data) {
+  $.getJSON('/data/chapters.json', function(data) {
     // Set JSON data to variable
-    missions = data;
+    chapters  = data;
   }).done(function() {
-    // Sort missions by experience ratio from highest to lowest
-    missions = missions.sort(function(key_1, key_2) {
+    // Sort chapters by experience ratio from highest to lowest
+    chapters = chapters.sort(function(key_1, key_2) {
       return -(key_1.experience_ratio - key_2.experience_ratio);
     });
   });
@@ -28,63 +27,119 @@ $(function() {
     let remaining_exp = $max_exp.val() - $current_exp.val();
     let remaining_ap  = $ap.val();
 
-    let exp_earned    = 0;
-    let ap_used       = 0;
+    const user_exp_ratio          = remaining_exp / remaining_ap;
+    let closest_exp_ratio_chapter = { "experience_ratio": 1_000_000 };
 
-    $tbody.append(`
-      <tr>
-        <td>Start</td>
-        <td class="text-right">-</td>
-        <td class="text-right">${remaining_exp}</td>
-        <td class="text-right">${remaining_ap}</td>
-      </tr>
-    `);
+    insertTableRow($tbody, '<strong>Start</strong>', '-', `<strong>${remaining_exp}</strong>`, `<strong>${remaining_ap}</strong>`);
 
-    let loops = 100
+    $.each(chapters, function(index, chapter) {
+      // We want the chapters with the lowest experience ratio that is HIGHER than the user's current experience ratio
+      if(chapter.experience_ratio >= user_exp_ratio && closest_exp_ratio_chapter.experience_ratio >= chapter.experience_ratio) {
+        closest_exp_ratio_chapter = chapter;
+      }
+    });
 
-    while(remaining_exp > 0 && loops > 0) {
-      $.each(missions, function(index, mission) {
-        // Skip if AP cost is too high
-        if(mission.ap_cost > remaining_ap) { return true; }
+    console.log('RATIOS', user_exp_ratio, closest_exp_ratio_chapter.experience_ratio);
+    if(closest_exp_ratio_chapter.experience_ratio == 1_000_000) {
+      alert('We could not calculate a way for you to level up with these numbers.');
+    }
 
-        // Skip if EXP gain > 25% of the remaining EXP because magic numbers
-        if(mission.chapter != 1 && mission.experience_earned >= remaining_exp * 0.25) { return true; }
+    // We repeat this chapter until the user's AP is about 2x the most efficient chapter
+    while(remaining_ap > closest_exp_ratio_chapter.ap_cost * 2 && remaining_exp - closest_exp_ratio_chapter.experience_earned > 0) {
+      remaining_exp -= closest_exp_ratio_chapter.experience_earned;
+      remaining_ap  -= closest_exp_ratio_chapter.ap_cost;
 
-        let temp_remaining_exp = remaining_exp - mission.experience_earned;
-        let temp_remaining_ap  = remaining_ap  - mission.ap_cost;
+      insertTableRow(
+        $tbody,
+        `Act ${closest_exp_ratio_chapter.act}, Chapter ${closest_exp_ratio_chapter.chapter}, ${closest_exp_ratio_chapter.act_difficulty}`,
+        closest_exp_ratio_chapter.experience_ratio,
+        `${remaining_exp} <span class="text-danger">(-${closest_exp_ratio_chapter.experience_earned})</span>`,
+        `${remaining_ap} <span class="text-danger">(-${closest_exp_ratio_chapter.ap_cost})</span>`
+      );
+    }
 
-        // Skip if experience earned is greater than remaining
-        if(0 > remaining_exp) { return true; }
+    let final_chapter_found = false;
 
-        remaining_exp = temp_remaining_exp;
-        remaining_ap  = temp_remaining_ap;
+    // See if there is one last chapter with a high exp ratio that can wrap this up
+    $.each(chapters, function(index, chapter) {
+      if(chapter.experience_earned >= remaining_exp && chapter.ap_cost <= remaining_ap) {
+        remaining_exp -= chapter.experience_earned;
+        remaining_ap  -= chapter.ap_cost;
 
-        $tbody.append(`
-          <tr>
-            <td>Act ${mission.act}, Chapter ${mission.chapter}, ${mission.act_difficulty}</td>
-            <td class="text-right">${mission.experience_ratio}</td>
-            <td class="text-right">${remaining_exp} <span class="text-danger">(-${mission.experience_earned})</span></td>
-            <td class="text-right">${remaining_ap} <span class="text-danger">(-${mission.ap_cost})</span></td>
-          </tr>
-        `);
+        final_chapter_found = true;
 
-        exp_earned += mission.experience_earned;
-        ap_used    += mission.ap_cost;
+        insertTableRow(
+          $tbody,
+          `Act ${chapter.act}, Chapter ${chapter.chapter}, ${chapter.act_difficulty}`,
+          chapter.experience_ratio,
+          `${remaining_exp} <span class="text-danger">(-${chapter.experience_earned})</span>`,
+          `${remaining_ap} <span class="text-danger">(-${chapter.ap_cost})</span>`
+        );
+      }
 
+      // Break out of each loop if final chapter found
+      if(final_chapter_found == true) {
         return false;
-      });
+      }
+    });
 
-      loops -= 1;
-      console.log(loops);
-    };
+     // // Skip if AP cost is too high
+      // if(chapter.ap_cost > remaining_ap) { return true; }
 
-    $tbody.append(`
-      <tr>
-        <td><strong>Total</strong></td>
-        <td class="text-right">-</td>
-        <td class="text-right"><strong>${exp_earned}</strong></td>
-        <td class="text-right"><strong>${ap_used}</strong></td>
-      </tr>
-    `);
+      // // Skip if EXP gain > 25% of the remaining EXP because magic numbers
+      // if(chapter.chapter != 1 && chapter.experience_earned >= remaining_exp * 0.25) { return true; }
+
+      // let temp_remaining_exp = remaining_exp - chapter.experience_earned;
+      // let temp_remaining_ap  = remaining_ap  - chapter.ap_cost;
+
+      // // Skip if experience earned is greater than remaining
+      // if(0 > remaining_exp) { return true; }
+
+      // remaining_exp = temp_remaining_exp;
+      // remaining_ap  = temp_remaining_ap;
+
+      // $tbody.append(`
+      //   <tr>
+      //     <td>Act ${chapter.act}, Chapter ${chapter.chapter}, ${chapter.act_difficulty}</td>
+      //     <td class="text-right">${chapter.experience_ratio}</td>
+      //     <td class="text-right">${remaining_exp} <span class="text-danger">(-${chapter.experience_earned})</span></td>
+      //     <td class="text-right">${remaining_ap} <span class="text-danger">(-${chapter.ap_cost})</span></td>
+      //   </tr>
+      // `);
+
+      // exp_earned += chapter.experience_earned;
+      // ap_used    += chapter.ap_cost;
+
+      // return false;
+    // });
+
+
+    // let loops = 100
+
+    // while(remaining_exp > 0 && loops > 0) {
+
+    //   loops -= 1;
+    //   console.log(loops);
+    // };
+
+    // $tbody.append(`
+    //   <tr>
+    //     <td><strong>Total</strong></td>
+    //     <td class="text-right">-</td>
+    //     <td class="text-right"><strong>${exp_earned}</strong></td>
+    //     <td class="text-right"><strong>${ap_used}</strong></td>
+    //   </tr>
+    // `);
   });
 });
+
+function insertTableRow(tbody, chapter, exp_ratio, remaining_exp, remaining_ap) {
+  tbody.append(`
+    <tr>
+      <td>${chapter}</td>
+      <td class="text-right">${exp_ratio}</td>
+      <td class="text-right">${remaining_exp}</td>
+      <td class="text-right">${remaining_ap}</td>
+    </tr>
+  `);
+};
