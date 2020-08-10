@@ -39,9 +39,9 @@ $(function() {
       }
     });
 
-    console.log('RATIOS', user_exp_ratio, closest_exp_ratio_chapter.experience_ratio);
     if(closest_exp_ratio_chapter.experience_ratio == 1_000_000) {
       alert('We could not calculate a way for you to level up with these numbers.');
+      return true;
     }
 
     // We repeat this chapter until the user's AP is about 2x the most efficient chapter
@@ -82,54 +82,6 @@ $(function() {
         return false;
       }
     });
-
-     // // Skip if AP cost is too high
-      // if(chapter.ap_cost > remaining_ap) { return true; }
-
-      // // Skip if EXP gain > 25% of the remaining EXP because magic numbers
-      // if(chapter.chapter != 1 && chapter.experience_earned >= remaining_exp * 0.25) { return true; }
-
-      // let temp_remaining_exp = remaining_exp - chapter.experience_earned;
-      // let temp_remaining_ap  = remaining_ap  - chapter.ap_cost;
-
-      // // Skip if experience earned is greater than remaining
-      // if(0 > remaining_exp) { return true; }
-
-      // remaining_exp = temp_remaining_exp;
-      // remaining_ap  = temp_remaining_ap;
-
-      // $tbody.append(`
-      //   <tr>
-      //     <td>Act ${chapter.act}, Chapter ${chapter.chapter}, ${chapter.act_difficulty}</td>
-      //     <td class="text-right">${chapter.experience_ratio}</td>
-      //     <td class="text-right">${remaining_exp} <span class="text-danger">(-${chapter.experience_earned})</span></td>
-      //     <td class="text-right">${remaining_ap} <span class="text-danger">(-${chapter.ap_cost})</span></td>
-      //   </tr>
-      // `);
-
-      // exp_earned += chapter.experience_earned;
-      // ap_used    += chapter.ap_cost;
-
-      // return false;
-    // });
-
-
-    // let loops = 100
-
-    // while(remaining_exp > 0 && loops > 0) {
-
-    //   loops -= 1;
-    //   console.log(loops);
-    // };
-
-    // $tbody.append(`
-    //   <tr>
-    //     <td><strong>Total</strong></td>
-    //     <td class="text-right">-</td>
-    //     <td class="text-right"><strong>${exp_earned}</strong></td>
-    //     <td class="text-right"><strong>${ap_used}</strong></td>
-    //   </tr>
-    // `);
   });
 });
 
