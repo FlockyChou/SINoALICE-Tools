@@ -34,32 +34,47 @@
       <strong>Note:</strong> This calculator is best used when trying to figure out how to spend all your AP when you're close to leveling up (< 1000 between your current EXP and the amount of EXP needed to level up). The logic is also crap so take this with a grain of salt.
     </div>
     <form id="experience-form">
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="">Current EXP</label>
-            <input id="current-experience" type="number" class="form-control" required>
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="current-experience">Current EXP</label>
+                <input id="current-experience" type="number" class="form-control" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="max-experience">Max EXP</label>
+                <input id="max-experience" type="number" class="form-control" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="ap">Current AP</label>
+                <input id="ap" type="number" class="form-control" min="6" required>
+              </div>
+            </div>
+          </div>
+          <div id="chapter-selector" class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  Loading...
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <input class="btn btn-primary btn-block" style="margin-top: 32px;" type="submit" value="Submit">
+            </div>
           </div>
         </div>
-        <div class="col">
-          <div class="form-group">
-            <label for="">Max EXP</label>
-            <input id="max-experience" type="number" class="form-control" required>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label for="ap">Current AP</label>
-            <input id="ap" type="number" class="form-control" min="6" required>
-          </div>
-        </div>
-        <div class="col-2">
-          <input class="btn btn-primary btn-block" style="margin-top: 32px;" type="submit" value="Submit">
-        </div> 
       </div>
     </form>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped  mt-4">
       <thead>
         <tr>
           <th>Mission</th>
