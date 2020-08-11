@@ -28,27 +28,6 @@ $(function() {
     generateChapterSelector(chapters, $chapter_selector);
   });
 
-  $chapter_selector.on('change', function() {
-    const $chapter_checkboxes = $('.chapter-checkbox');
-    let checked_chapters      = [];
-
-    $.each($chapter_checkboxes, function(index, checkbox) {
-      const $checkbox  = $(checkbox);
-      const is_checked = $checkbox.is(':checked');
-
-      if(is_checked){ checked_chapters.push($checkbox.val()); }
-    });
-
-    filtered_chapters = [];
-
-    $.each(sorted_chapters, function(index, chapter) {
-      const chapter_index = generateChapterKey(chapter.act_difficulty, chapter.act, chapter.chapter);
-
-      // $.inArray returns the index of the object so we need to check for a non-negative index for true
-      if($.inArray(chapter_index, checked_chapters) >= 0) { filtered_chapters.push(chapter); };
-    });
-  });
-
   $form.submit(function(e) {
     e.preventDefault();
 
@@ -63,6 +42,8 @@ $(function() {
     // Clear the table
     $tbody.html('');
     insertTableRow($tbody, '<strong>Start</strong>', '-', `<strong>${remaining_exp}</strong>`, `<strong>${remaining_ap}</strong>`);
+
+    filtered_chapters = updateFilteredChapters(sorted_chapters);
 
     // Find the quest with the closest EXP/AP ratio to the user's current state
     $.each(filtered_chapters, function(index, chapter) {
@@ -172,3 +153,26 @@ function insertTableRow(tbody, chapter, exp_ratio, remaining_exp, remaining_ap) 
     </tr>
   `);
 };
+
+function updateFilteredChapters(sorted_chapters) {
+  const $chapter_checkboxes = $('.chapter-checkbox');
+  let checked_chapters      = [];
+
+  $.each($chapter_checkboxes, function(index, checkbox) {
+    const $checkbox  = $(checkbox);
+    const is_checked = $checkbox.is(':checked');
+
+    if(is_checked){ checked_chapters.push($checkbox.val()); }
+  });
+
+  let filtered_chapters = [];
+
+  $.each(sorted_chapters, function(index, chapter) {
+    const chapter_index = generateChapterKey(chapter.act_difficulty, chapter.act, chapter.chapter);
+
+    // $.inArray returns the index of the object so we need to check for a non-negative index for true
+    if($.inArray(chapter_index, checked_chapters) >= 0) { filtered_chapters.push(chapter); };
+  });
+
+  return filtered_chapters;
+}
