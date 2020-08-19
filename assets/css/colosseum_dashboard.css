@@ -11,10 +11,6 @@
   overflow: hidden;
 }
 
-.nightmare img {
-  max-width: 75px;
-}
-
 .nightmare-checkbox-container {
   width: 43px;
   float: left;
@@ -26,15 +22,15 @@
 }
 
 .nightmare-image-container {
-  width: 94px;
+  max-width: 65px;
   float: left;
 }
 
 .nightmare-image {
-  width: 100px;
+  max-width: 50px;
 }
 
 .nightmare-effect {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
 }

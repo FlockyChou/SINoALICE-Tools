@@ -76,7 +76,7 @@ function generateNightmare(nightmares, nightmare_name) {
   `;
 
   return `
-    <label class="card nightmare d-flex flex-row pull-left mr-3" data-toggle="popover" data-placement="bottom" data-title="${nightmare_name}" data-content="${popover_data}">
+    <label class="card nightmare d-flex flex-row pull-left mr-2" data-toggle="popover" data-placement="bottom" data-title="${nightmare_name}" data-content="${popover_data}">
       <div class="nightmare-checkbox-container p-2 bg-light border-right">
         <input class="nightmare-checkbox" type="checkbox">
       </div>
