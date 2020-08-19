@@ -1,6 +1,60 @@
 {
-  "Hateful Golem": {
-    "image": "hateful_golem.png",
+  "Girl (SR)": {
+    "image": "girl_sr.png",
+    "effects": [
+      "buff-patk",
+      "buff-matk"
+    ],
+    "skill_name": "Song of Betrayal (I)",
+    "description": "Increases P.ATK and M.ATK of surviving allies in the front-row. If there is an ATK debuff effective, effect will be increased according to the reduction.",
+    "sp_cost": 220,
+    "charge_time_in_seconds": 70,
+    "duration_in_seconds": 0
+  },
+  "Girl (L)": {
+    "image": "girl_l.png",
+    "effects": [
+      "buff-patk",
+      "buff-matk"
+    ],
+    "skill_name": "Song of Betrayal (II)",
+    "description": "Greatly increases P.ATK and M.ATK of surviving allies in the front-row. If there is an ATK debuff effective, effect will be increased according to the reduction.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Gluttonous Eris (SR)": {
+    "image": "gluttonous_eris_sr.png",
+    "effects": [],
+    "skill_name": "Fairy King of Magic (II)",
+    "description": "Greatly reduces the SP cost of all skills for all allies.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 70,
+    "duration_in_seconds": 110
+  },
+  "Gluttonous Eris (L)": {
+    "image": "gluttonous_eris_l.png",
+    "effects": [],
+    "skill_name": "Fairy King of Magic (III)",
+    "description": "Massively reduces the SP cost of all skills for all allies.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 120
+  },
+  "Hateful Bird (A)": {
+    "image": "hateful_bird_a.png",
+    "effects": [
+      "debuff-patk",
+      "debuff-matk"
+    ],
+    "skill_name": "Begrudging Blade (II)",
+    "description": "Greatly reduces ATK of all enemies in the vanguard, even if they have fainted. Applies to both P.ATK and M.ATK.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Hateful Golem (A)": {
+    "image": "hateful_golem_a.png",
     "effects": [
       "buff-pdef",
       "buff-mdef"
@@ -9,6 +63,54 @@
     "description": "Greatly increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
     "sp_cost": 200,
     "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Hateful Hound (A)": {
+    "image": "hateful_hound_a.png",
+    "effects": [
+      "buff-patk",
+      "buff-matk"
+    ],
+    "skill_name": "Victorious Melody (II)",
+    "description": "Greatly increases ATK of all surviving allies in the vanguard. Applies to both P.ATK and M.ATK.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Hateful Plant (A)": {
+    "image": "hateful_plant_a.png",
+    "effects": [
+      "debuff-pdef",
+      "debuff-mdef"
+    ],
+    "skill_name": "Armor of Lamentation (II)",
+    "description": "Greatly reduces DEF of all enemies in the vanguard, even if they have fainted. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Library Wisp (SR)": {
+    "image": "library_wisp_sr.png",
+    "effects": [
+      "buff-pdef",
+      "buff-mdef"
+    ],
+    "skill_name": "Blessed Armor (II)",
+    "description": "Greatly increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Library Wisp (L)": {
+    "image": "library_wisp_l.png",
+    "effects": [
+      "buff-pdef",
+      "buff-mdef"
+    ],
+    "skill_name": "Blessed Armor (III)",
+    "description": "Massively increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 50,
     "duration_in_seconds": 0
   }
 }

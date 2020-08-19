@@ -39,9 +39,117 @@
       <div class="card-header">
         Nightmare Summon Order
       </div>
-      <div class="card-body overflow-hidden overflow-x-auto">
-        <div id="nightmares" class="pull-left"></div>
-        <button class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
+      <div id="nightmares-container" class="card-body">
+        <div id="main-nightmares" class="nightmares-list d-flex flex-row flex-wrap pull-left">
+          <button class="add-nightmare-btn btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card mt-4">
+      <div class="card-header">
+        Situational Nightmares
+      </div>
+      <div class="nightmares-container card-body">
+        <div id="situational-nightmares" class="nightmares-list d-flex flex-row flex-wrap pull-left">
+          <button class="add-nightmare-btn btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            Shinma / Demon Summons
+          </div>
+          <ul class="list-group list-group-flush border-top-0">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-2 text-right">16 min</div>
+                <div class="col">
+                  <select class="chosen" name="first-shinma">
+                    <option selected disabled></option>
+                    <option>Instruments</option>
+                    <option>Staves</option>
+                    <option>Tomes</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <select class="chosen" name="first-shinma">
+                    <option selected disabled></option>
+                    <option>Blade & Hammers</option>
+                    <option>Spears & Bows</option>
+                  </select>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-2 text-right">8 min</div>
+                <div class="col">
+                  <select class="chosen" name="first-shinma">
+                    <option selected disabled></option>
+                    <option>Instruments</option>
+                    <option>Staves</option>
+                    <option>Tomes</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <select class="chosen" name="first-shinma">
+                    <option selected disabled></option>
+                    <option>Blade & Hammers</option>
+                    <option>Spears & Bows</option>
+                  </select>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            Vanguard Targets
+          </div>
+          <table class="table table-striped mb-0">
+            <thead>
+              <tr>
+                <th class="border-top-0">Name</th>
+                <th class="border-top-0">Power</th>
+                <th class="border-top-0">HP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="form-control form-control-sm type="text"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+              </tr>
+              <tr>
+                <td><input class="form-control form-control-sm" type="text"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+              </tr>
+              <tr>
+                <td><input class="form-control form-control-sm" type="text"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+              </tr>
+              <tr>
+                <td><input class="form-control form-control-sm" type="text"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+              </tr>
+              <tr>
+                <td><input class="form-control form-control-sm" type="text"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+                <td><input class="form-control form-control-sm" type="number"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       </div>
     </div>
   </div>

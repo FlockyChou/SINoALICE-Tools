@@ -1,5 +1,10 @@
-.overflow-x-auto {
-  overflow-x: auto;
+.nightmares-container {
+  padding-right: 0;
+}
+
+.add-nightmare-btn {
+  height: 50px;
+  order: 100;
 }
 
 .nightmare {
@@ -21,7 +26,7 @@
 }
 
 .nightmare-image-container {
-  width: 92px;
+  width: 94px;
   float: left;
 }
 
