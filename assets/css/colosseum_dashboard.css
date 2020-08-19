@@ -11,6 +11,20 @@
   overflow: hidden;
 }
 
+.nightmare-summoned {
+  position: relative;
+  opacity: 0.5;
+}
+
+.nightmare-summoned:before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: black;
+  opacity: 0.5;
+}
+
 .nightmare-checkbox-container {
   width: 43px;
   float: left;

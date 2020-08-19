@@ -26,12 +26,10 @@ $(function() {
     nightmare_selector_data = nightmare_options.join('');
   });
 
-  $add_nightmare_button.click(function(e) {
-    console.log(this);
-    $nightmares_list = $(this).closest('.nightmares-list');
-    console.log($nightmares_list);
-  });
-
+  // Since we can't add things to hidden elements (I need to find a better way to do this),
+  //   do the magic and add items to the nightmare select list on first modal load.
+  //
+  // This totally breaks sometimes.
   $add_nightmare_modal.on('shown.bs.modal', function (e) {
     // On first time showing modal, add elements to dropdown
     if(first_modal_load) {
@@ -40,7 +38,7 @@ $(function() {
 
         let $nightmare = $(generateNightmare(nightmares, e.target.value));
         $nightmares_list.append($nightmare);
-        $('.nightmare').popover({ html: true, trigger: 'hover' });
+        $('.nightmare-unsummoned').popover({ html: true, trigger: 'hover' });
         
         // Clear Input and hide modal
         $nightmare_selector.val('').trigger("chosen:updated");
@@ -50,20 +48,41 @@ $(function() {
       first_modal_load = false;
     }
   });
+
+  // When adding a nightmare, add it to the list the button is a part of.
+  // This make the button works for all nightmare lists without custom buttons.
+  $add_nightmare_button.click(function(e) {
+    $nightmares_list = $(this).closest('.nightmares-list');
+  });
+
+  // On nightmare checkbox toggle, 
+  const $body = $('body');
+  $body.on('change', '.nightmare-checkbox', function() {
+    const $nightmare = $(this).closest('.nightmare');
+
+    if(this.checked) {
+      $nightmare.removeClass('nightmare-unsummoned').addClass('nightmare-summoned');
+    } else {
+      $nightmare.addClass('nightmare-unsummoned').removeClass('nightmare-summoned');
+    }
+
+    // Reinitialize popovers and destroy on summoned nightmares
+    $('.nightmare-unsummoned').popover('enable');
+    $('.nightmare-summoned').popover('disable');
+  });
 });
 
+// Genearte nightmare option > select
 function generateNightmareSelectorOption(nightmare_name, image_name) {
   return `<option data-img-src="/assets/img/nightmares/${image_name}">${nightmare_name}</option>`;
 }
 
+// Generate nightmare checkbox
 function generateNightmare(nightmares, nightmare_name) {
   const nightmare  = nightmares[nightmare_name];
   let effect_icons = [];
 
-  $.each(nightmare.effects, function(index, effect) {
-    effect_icons.push(`<img class="nightmare-effect" src="/assets/img/effects/${effect}.png" alt="${effect}" draggable="false">`);
-  });
-
+  // Generate popover data to append later
   const nightmare_skill_name = nightmare.skill_name;
   const popover_data = `
     <strong>${nightmare_skill_name}</strong>
@@ -75,8 +94,14 @@ function generateNightmare(nightmares, nightmare_name) {
     </p>
   `;
 
+  // Generate nightmare effect icons to append later
+  $.each(nightmare.effects, function(index, effect) {
+    effect_icons.push(`<img class="nightmare-effect" src="/assets/img/effects/${effect}.png" alt="${effect}" draggable="false">`);
+  });
+
+  // Put it all together
   return `
-    <label class="card nightmare d-flex flex-row pull-left mr-2" data-toggle="popover" data-placement="bottom" data-title="${nightmare_name}" data-content="${popover_data}">
+    <label class="card nightmare nightmare-unsummoned d-flex flex-row pull-left mr-2" data-toggle="popover" data-placement="bottom" data-title="${nightmare_name}" data-content="${popover_data}">
       <div class="nightmare-checkbox-container p-2 bg-light border-right">
         <input class="nightmare-checkbox" type="checkbox">
       </div>
