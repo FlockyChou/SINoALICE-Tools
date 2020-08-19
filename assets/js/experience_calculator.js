@@ -11,7 +11,7 @@ $(function() {
   const $chapter_selector   = $('#chapter-selector');
 
   // Get chapters data from JSON
-  $.getJSON('/data/chapters.json', function(data) {
+  $.getJSON('/data/experience_calculator/chapters.json', function(data) {
     // Set JSON data to variable
     chapters  = data;
   }).done(function() {

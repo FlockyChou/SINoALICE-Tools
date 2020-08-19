@@ -1,0 +1,14 @@
+{
+  "Hateful Golem": {
+    "image": "hateful_golem.png",
+    "effects": [
+      "buff-pdef",
+      "buff-mdef"
+    ],
+    "skill_name": "Blessed Armor (II)",
+    "description": "Greatly increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  }
+}

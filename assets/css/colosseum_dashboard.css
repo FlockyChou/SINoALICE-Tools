@@ -1,0 +1,35 @@
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.nightmare {
+  overflow: hidden;
+}
+
+.nightmare img {
+  max-width: 75px;
+}
+
+.nightmare-checkbox-container {
+  width: 43px;
+  float: left;
+}
+
+.nightmare-checkbox {
+  width: 25px;
+  height: 25px;
+}
+
+.nightmare-image-container {
+  width: 92px;
+  float: left;
+}
+
+.nightmare-image {
+  width: 100px;
+}
+
+.nightmare-effect {
+  width: 20px;
+  height: 20px;
+}

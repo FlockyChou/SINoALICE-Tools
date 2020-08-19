@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <title>SINoALICE Tools</title>
+  <title>SINoALICE Tools - Colosseum Dashboard</title>
 
   <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
   <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/image-select/2.0/ImageSelect.min.css" />
+  <link rel="stylesheet" href="/assets/css/colosseum_dashboard.css" />
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,31 +34,42 @@
     </div>
   </nav>
   <div class="container mt-4">
-    <div class="row">
-      <div class="col">
-        <a class="btn btn-secondary btn-block" href="/colosseum_dashboard.html">
-          <div class="card-body text-center">
-            <div>
-              <i class="fa fa-columns fa-5x"></i>
-            </div>
-            <div class="mt-2">Colosseum Dashboard (WIP)</div>
-          </div>
-        </a>
+    <h2>Colosseum Dashboard (WIP)</h2>
+    <div class="card mt-4">
+      <div class="card-header">
+        Nightmare Summon Order
       </div>
-      <div class="col">
-        <a class="btn btn-secondary btn-block" href="/experience_calculator.html">
-          <div class="card-body text-center">
-            <div><i class="fa fa-calculator fa-5x"></i></div>
-            <div class="mt-2">Experience Calculator</div>
-          </div>
-        </a>
+      <div class="card-body overflow-hidden overflow-x-auto">
+        <div id="nightmares" class="pull-left"></div>
+        <button class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="add-nightmare" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Nightmare</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <select id="nightmare-selector">
+            <option selected disabled value=""></option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="/assets/js/script.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/image-select/2.0/ImageSelect.jquery.min.js"></script>
+  <script src="/assets/js/colosseum_dashboard.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172982525-2"></script>
   <script>

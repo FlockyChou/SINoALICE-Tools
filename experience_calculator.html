@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <title>SINoALICE Tools - Experience Calculator</title>
+
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a href="/" class="navbar-brand">SINoALICE Tools</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navbar-menu" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/FlockyChou/SINoALICE-Tools" target="_blank"><i class="fa fa-github"></i> GitHub</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <h2>Experience Calculator</h2>
+    <div class="alert alert-info mt-4">
+      <strong>Note:</strong> This calculator is best used when trying to figure out how to spend all your AP when you're close to leveling up (< 1000 between your current EXP and the amount of EXP needed to level up). The logic is also crap so take this with a grain of salt.
+    </div>
+    <form id="experience-form">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="current-experience">Current EXP</label>
+                <input id="current-experience" type="number" class="form-control" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="max-experience">Max EXP</label>
+                <input id="max-experience" type="number" class="form-control" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="ap">Current AP</label>
+                <input id="ap" type="number" class="form-control" min="6" required>
+              </div>
+            </div>
+          </div>
+          <div id="chapter-selector" class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  Loading...
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <input class="btn btn-primary btn-block" style="margin-top: 32px;" type="submit" value="Submit">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <table class="table table-bordered table-striped  mt-4">
+      <thead>
+        <tr>
+          <th>Mission</th>
+          <th>EXP Ratio</th>
+          <th>Remaining EXP</th>
+          <th>Remaining AP</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/assets/js/experience_calculator.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172982525-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-172982525-2');
+  </script>
+</body>
+</html>
