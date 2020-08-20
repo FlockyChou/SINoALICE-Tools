@@ -101,13 +101,18 @@ function generateNightmare(nightmares, nightmare_name) {
 
   // Put it all together
   return `
-    <label class="card nightmare nightmare-unsummoned d-flex flex-row pull-left mr-2" data-toggle="popover" data-placement="bottom" data-title="${nightmare_name}" data-content="${popover_data}">
-      <div class="nightmare-checkbox-container p-2 bg-light border-right">
-        <input class="nightmare-checkbox" type="checkbox">
+    <label class="card nightmare nightmare-unsummoned pull-left mr-2" data-toggle="popover" data-placement="bottom" data-title="${nightmare_name}" data-content="${popover_data}">
+      <div class="nightmare-info d-flex flex-row">
+        <div class="nightmare-checkbox-container p-2 bg-light border-right">
+          <input class="nightmare-checkbox" type="checkbox">
+        </div>
+        <div class="nightmare-image-container p-2">
+          <img class="nightmare-image" src="/assets/img/nightmares/${nightmare.image}" alt="${nightmare_name}" draggable="false">
+          <div class="nightmare-effects text-center">${effect_icons.join('')}</div>
+        </div>
       </div>
-      <div class="nightmare-image-container p-2">
-        <img class="nightmare-image" src="/assets/img/nightmares/${nightmare.image}" alt="${nightmare_name}" draggable="false">
-        <div class="nightmare-effects text-center">${effect_icons.join('')}</div>
+      <div class="nightmare-summoner border-top">
+        <input class="form-control form-control-sm border-0" type="text" placeholder="N/A">
       </div>
     </label>
   </button>

@@ -8,6 +8,7 @@
 }
 
 .nightmare {
+  width: 110px;
   overflow: hidden;
 }
 
@@ -23,6 +24,10 @@
   position: absolute;
   background: black;
   opacity: 0.5;
+}
+
+.nightmare-info {
+  height: 90px;
 }
 
 .nightmare-checkbox-container {
