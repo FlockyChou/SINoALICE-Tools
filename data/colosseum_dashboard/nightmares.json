@@ -1,4 +1,26 @@
 {
+  "Disembodied Emil (SR)": {
+    "image": "disembodied_emil_sr.png",
+    "effects": [
+      "buff-patk" 
+    ],
+    "skill_name": "False Blade (II)",
+    "description": "Greatly raise P.ATK for all surviving allies.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 80,
+    "duration_in_seconds": 0
+  },
+  "Disembodied Emil (L)": {
+    "image": "disembodied_emil_l.png",    
+    "effects": [
+      "buff-patk" 
+    ],  
+    "skill_name": "False Blade (III)",
+    "description": "Greatly raise P.ATK for all surviving allies.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 70,
+    "duration_in_seconds": 0
+  },
   "Girl (SR)": {
     "image": "girl_sr.png",
     "effects": [
@@ -6,8 +28,8 @@
       "buff-matk"
     ],
     "skill_name": "Song of Betrayal (I)",
-    "description": "Increases P.ATK and M.ATK of surviving allies in the front-row. If there is an ATK debuff effective, effect will be increased according to the reduction.",
-    "sp_cost": 220,
+    "description": "Increases P.ATK and M.ATK of surviving allies in the front row. If there is an ATK debuff effective, effect will be increased according to the reduction.",
+    "sp_cost": 200,
     "charge_time_in_seconds": 70,
     "duration_in_seconds": 0
   },
@@ -89,6 +111,30 @@
     "charge_time_in_seconds": 60,
     "duration_in_seconds": 0
   },
+  "Karkinos (SR)": {
+    "image": "karkinos_sr.png",
+    "effects": [
+      "buff-pdef",
+      "buff-mdef"
+    ],
+    "skill_name": "Blessed Armor (II)",
+    "description": "Greatly increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Karkinos (L)": {
+    "image": "karkinos_l.png",
+    "effects": [
+      "buff-pdef",
+      "buff-mdef"
+    ],
+    "skill_name": "Blessed Armor (III)",
+    "description": "Massively increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 50,
+    "duration_in_seconds": 0
+  },
   "Library Wisp (SR)": {
     "image": "library_wisp_sr.png",
     "effects": [
@@ -112,5 +158,54 @@
     "sp_cost": 0,
     "charge_time_in_seconds": 50,
     "duration_in_seconds": 0
-  }
+  },
+
+  "Solitary Black Rabbit (S)": {
+    "image": "solitary_black_rabbit_s.png",
+    "effects": [
+      "buff-patk",
+      "buff-matk"
+    ],
+    "skill_name": "Victorious Melody (II)",
+    "description": "Greatly increases ATK of all surviving allies in the vanguard. Applies to both P.ATK and M.ATK.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Solitary Black Rabbit (SR)": {
+    "image": "solitary_black_rabbit_sr.png",
+    "effects": [
+      "buff-patk",
+      "buff-matk"
+    ],
+    "skill_name": "Victorious Melody (III)",
+    "description": "Massively increases ATK of all surviving allies in the vanguard. Applies to both P.ATK and M.ATK.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 50,
+    "duration_in_seconds": 0
+  },
+  "Tricky Wisp (SR)": { 
+    "image": "tricky_wisp_sr.png",
+    "effects": [
+      "buff-pdef",
+      "buff-mdef"
+    ],
+    "skill_name": "Enchanted Armor (I)",
+    "description": "Moderately increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 0
+  },
+  "Tricky Wisp (L)": { 
+    "image": "tricky_wisp_l.png",
+    "effects": [
+      "buff-pdef",
+      "buff-mdef"
+    ],
+    "skill_name": "Enchanted Armor (II)",
+    "description": "Greatly increases DEF of all surviving allies in the vanguard. Applies to both P.DEF and M.DEF.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 50,
+    "duration_in_seconds": 0
+  }    
 }
