@@ -47,7 +47,9 @@
   },
   "Gluttonous Eris (SR)": {
     "image": "gluttonous_eris_sr.png",
-    "effects": [],
+    "effects": [
+      "sp-all"
+    ],
     "skill_name": "Fairy King of Magic (II)",
     "description": "Greatly reduces the SP cost of all skills for all allies.",
     "sp_cost": 0,
@@ -56,7 +58,9 @@
   },
   "Gluttonous Eris (L)": {
     "image": "gluttonous_eris_l.png",
-    "effects": [],
+    "effects": [
+      "sp-all"
+    ],
     "skill_name": "Fairy King of Magic (III)",
     "description": "Massively reduces the SP cost of all skills for all allies.",
     "sp_cost": 0,
