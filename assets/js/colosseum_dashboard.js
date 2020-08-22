@@ -65,7 +65,6 @@ $(function() {
 
         const nightmare_key  = $nightmares_list[0].id;
         nightmare_cookie[nightmare_key] = getNightmaresList($nightmares_list);
-        console.log(nightmare_cookie);
         saveCookies(nightmare_cookie);
         
         // Clear Input and hide modal
@@ -96,13 +95,20 @@ $(function() {
 
 // Get cookies for page
 function getCookies() {
-  if(document.cookie == "") { return false; }
+  if(document.cookie == "") {
+    let cookie = {};
+    $.each($('.nightmares-list'), function(_index, list) {
+      cookie[list.id] = [];
+    });
+    
+    return cookie;
+  }
 
   const cookies   = document.cookie.split('; ');
   let cookie_data = {}
 
   $.each(cookies, function(_index, cookie) {
-    let [key, values] = cookie.split('=');
+    const [key, values] = cookie.split('=');
     cookie_data[key] = uriDecodeArray(values.split(','));
   });
 
@@ -119,8 +125,6 @@ function saveCookies(cookies) {
 
 // Populates nightmares on the page using the cookie data
 function populateNightmares(nightmares, cookie_data) {
-  if(document.cookie == "") { return false; }
-
   $.each(cookie_data, function(key, cookie_nightmares) {
     const $nightmares_list = $(`#${key}`);
 
