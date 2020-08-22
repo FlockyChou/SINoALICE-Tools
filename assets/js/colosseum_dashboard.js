@@ -14,6 +14,8 @@ $(function() {
   const $nightmare_selector     = $('#nightmare-selector');
   const $reset_nightmare_button = $('.reset-nightmare-btn');
 
+  const $body = $('body');
+
   // Initialize static chosen fields
   $('.chosen').chosen({ width: '100%' });
 
@@ -50,6 +52,18 @@ $(function() {
     saveCookies(nightmare_cookie);
   });
 
+  // Save nightmare information after summoner is updated
+  $body.on('keyup', '.nightmare-summoner', function() {
+    const $this    = $(this);
+    const summoner = $this.val();
+
+    const list_id = $this.closest('.nightmares-list')[0].id;
+    $nightmares_list = $(`#${list_id}`);
+
+    nightmare_cookie[list_id] = getNightmaresList($nightmares_list);
+    saveCookies(nightmare_cookie);
+  });
+
   // Since we can't add things to hidden elements (I need to find a better way to do this),
   //   do the magic and add items to the nightmare select list on first modal load.
   //
@@ -77,7 +91,6 @@ $(function() {
   });
 
   // On nightmare checkbox toggle, 
-  const $body = $('body');
   $body.on('change', '.nightmare-checkbox', function() {
     const $nightmare = $(this).closest('.nightmare');
 
@@ -135,7 +148,8 @@ function populateNightmares(nightmares, cookie_data) {
     }
 
     $.each(cookie_nightmares, function(_index, cookie_nightmare) {
-      const $nightmare = generateNightmare(nightmares, cookie_nightmare);
+      const [nightmare_name, summoner] = cookie_nightmare.split('::');
+      const $nightmare = generateNightmare(nightmares, nightmare_name, summoner);
       $nightmares_list.append($nightmare);
     });
   });
@@ -146,7 +160,8 @@ function getNightmaresList(nightmares_list) {
   if(nightmares_list.length < 1) { return []; }
 
   return $.map(nightmares_list.find('.nightmare'), function(nightmare, _index) {
-    return $(nightmare).data('title');
+    const $nightmare = $(nightmare);
+    return `${$nightmare.data('title')}::${$nightmare.find('.nightmare-summoner').val()}`;
   });
 }
 
@@ -170,7 +185,7 @@ function generateNightmareSelectorOption(nightmare_name, image_name) {
 }
 
 // Generate nightmare checkbox
-function generateNightmare(nightmares, nightmare_name) {
+function generateNightmare(nightmares, nightmare_name, summoner = "") {
   const nightmare  = nightmares[nightmare_name];
   let effect_icons = [];
 
@@ -203,8 +218,8 @@ function generateNightmare(nightmares, nightmare_name) {
           <div class="nightmare-effects text-center">${effect_icons.join('')}</div>
         </div>
       </div>
-      <div class="nightmare-summoner border-top">
-        <input class="form-control form-control-sm border-0" type="text" placeholder="N/A">
+      <div class="border-top">
+        <input class="nightmare-summoner form-control form-control-sm border-0" type="text" placeholder="N/A" value="${summoner}">
       </div>
     </label>
   `;
