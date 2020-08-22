@@ -152,6 +152,8 @@ function populateNightmares(nightmares, cookie_data) {
       const $nightmare = generateNightmare(nightmares, nightmare_name, summoner);
       $nightmares_list.append($nightmare);
     });
+
+    $('.nightmare-unsummoned').popover({ html: true, trigger: 'hover' });
   });
 };
 
