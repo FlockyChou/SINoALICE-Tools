@@ -96,6 +96,8 @@ $(function() {
 
 // Get cookies for page
 function getCookies() {
+  if(document.cookie == "") { return false; }
+
   const cookies   = document.cookie.split('; ');
   let cookie_data = {}
 
@@ -117,6 +119,8 @@ function saveCookies(cookies) {
 
 // Populates nightmares on the page using the cookie data
 function populateNightmares(nightmares, cookie_data) {
+  if(document.cookie == "") { return false; }
+
   $.each(cookie_data, function(key, cookie_nightmares) {
     const $nightmares_list = $(`#${key}`);
 
