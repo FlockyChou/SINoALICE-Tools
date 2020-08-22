@@ -38,10 +38,11 @@
     <div class="card mt-4">
       <div class="card-header">
         Nightmare Summon Order
+        <button class="reset-nightmare-btn btn btn-sm btn-danger pull-right" data-list="main-nightmares">Reset</button>
       </div>
       <div id="nightmares-container" class="card-body">
         <div id="main-nightmares" class="nightmares-list d-flex flex-row flex-wrap pull-left">
-          <button class="add-nightmare-btn btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
+          <button class="add-nightmare-btn btn btn-outline-primary btn-lg" data-list="main-nightmares" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
         </div>
       </div>
     </div>
@@ -49,10 +50,11 @@
     <div class="card mt-2">
       <div class="card-header">
         Situational Nightmares
+        <button class="reset-nightmare-btn btn btn-sm btn-danger pull-right" data-list="situational-nightmares">Reset</button>
       </div>
       <div class="nightmares-container card-body">
         <div id="situational-nightmares" class="nightmares-list d-flex flex-row flex-wrap pull-left">
-          <button class="add-nightmare-btn btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
+          <button class="add-nightmare-btn btn btn-outline-primary btn-lg" data-list="situational-nightmares" data-toggle="modal" data-target="#add-nightmare"><i class="fa fa-plus"></i></button>
         </div>
       </div>
     </div>

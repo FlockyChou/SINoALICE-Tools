@@ -7,6 +7,10 @@
   order: 100;
 }
 
+.reset-nightmare-btn {
+  padding: 0 .5rem !important;
+}
+
 .nightmare {
   width: 110px;
   overflow: hidden;
