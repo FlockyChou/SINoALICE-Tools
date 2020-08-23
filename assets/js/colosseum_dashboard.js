@@ -1,15 +1,10 @@
 $(function() {
-  let nightmare_cookie = getCookies();
-
-  // Nightmare select dropdown variables
-  let first_modal_load  = true;
-  let nightmares;
-  let nightmare_options = [];
-  let nightmare_selector_data;
+  let cookie_nightmares = getCookies();
+  let all_nightmares;
 
   // Add Nightmare elements
-  let list_id;
-  let $nightmares_list;
+  let target_nightmare_list_id;
+  let $target_nightmare_list;
   const $add_nightmare_button   = $('.add-nightmare-btn');
   const $add_nightmare_modal    = $('#add-nightmare');
   const $nightmare_selector     = $('#nightmare-selector');
@@ -33,81 +28,73 @@ $(function() {
   // Get nightmare data from JSON
   $.getJSON('/data/colosseum_dashboard/nightmares.json', function(data) {
     // Set JSON data to variable
-    nightmares = data;
+    all_nightmares = data;
   }).done(function() {
-    $.each(nightmares, function(nightmare_name, nightmare) {
-      nightmare_options.push(generateNightmareSelectorOption(nightmare_name, nightmare.image));
+    let nightmare_options = [];
+    let nightmare_selector_html;
+
+    // Once JSON is loaded properly, create dropdown for "Add Nightmare"
+    $.each(all_nightmares, function(nightmare_name, nightmare_info) {
+      nightmare_options.push(generateNightmareSelectorOption(nightmare_name, nightmare_info.image));
     });
 
-    nightmare_selector_data = nightmare_options.join('');
+    // Add dropdown for nightmares
+    nightmare_selector_html = nightmare_options.join('');
+    $nightmare_selector.append(nightmare_selector_html).chosen({ width: '100%' }).change(function(e) {
+      // On nightmare select, add nightmare data to respective list
+      const $nightmare = $(generateNightmare(all_nightmares, e.target.value));
+      $target_nightmare_list.append($nightmare);
+      
+      // Add popover to unsummoned nightmares
+      $('.nightmare-unsummoned').popover({ html: true, trigger: 'hover' });
+
+      // Update cookie
+      const target_nightmare_list_id = $target_nightmare_list[0].id;
+      saveCookie(cookie_nightmares, target_nightmare_list_id, $target_nightmare_list);
+        
+      // Clear Input and hide modal
+      $nightmare_selector.val('');
+      $add_nightmare_modal.modal('hide');
+    });
+
+    // Hide modal after appending dropdown info
+    $add_nightmare_modal.removeClass('display-block');
 
     // Populate page with cookie data
-    populateNightmares(nightmares, nightmare_cookie);
+    populateNightmares(all_nightmares, cookie_nightmares);
   });
 
   // Modals don't know what section they should be sending data to.
   // Grab the nightmare section to target from the button and save it to a variable the modal to access.
-  $add_nightmare_button.add($import_nightmares_button).add($reset_nightmare_button).click(function() {
-    list_id = $(this).data('list');
-    $nightmares_list = $(`#${list_id}`);
+  $add_nightmare_button.add($import_nightmares_button).add($export_nightmares_button).add($reset_nightmare_button).click(function() {
+    target_nightmare_list_id = $(this).data('list');
+    $target_nightmare_list   = $(`#${target_nightmare_list_id}`);
+  });
+
+  $add_nightmare_modal.on('shown.bs.modal', function() {
+    $nightmare_selector.trigger('chosen:open');
   });
 
   // When adding a nightmare, add it to the list the button is a part of.
   // This make the button works for all nightmare lists without custom buttons.
   $reset_nightmare_button.click(function() {
-    $nightmares_list.find('.nightmare').remove();
-
-    nightmare_cookie[list_id] = getNightmaresList($nightmares_list);
-    saveCookies(nightmare_cookie);
+    clearNightmareList($target_nightmare_list);
+    saveCookie(cookie_nightmares, target_nightmare_list_id, $target_nightmare_list);
   });
 
   // Save nightmare information after summoner is updated
   $body.on('keyup', '.nightmare-summoner', function() {
-    const $this    = $(this);
-    const summoner = $this.val();
+    // Get nightmares list
+    target_nightmare_list_id = $(this).closest('.nightmares-list')[0].id;
+    $target_nightmare_list   = $(`#${target_nightmare_list_id}`);
 
-    list_id = $this.closest('.nightmares-list')[0].id;
-    $nightmares_list = $(`#${list_id}`);
-
-    nightmare_cookie[list_id] = getNightmaresList($nightmares_list);
-    saveCookies(nightmare_cookie);
-  });
-
-  // Since we can't add things to hidden elements (I need to find a better way to do this),
-  //   do the magic and add items to the nightmare select list on first modal load.
-  //
-  // This totally breaks sometimes.
-  $add_nightmare_modal.on('shown.bs.modal', function (e) {
-    // On first time showing modal, add elements to dropdown
-    if(first_modal_load) {
-      $nightmare_selector.append(nightmare_selector_data).chosen({ width: '100%' }).change(function(e) {
-        // Append nightmare to the respective list
-        const $nightmare = $(generateNightmare(nightmares, e.target.value));
-        $nightmares_list.append($nightmare);
-        $('.nightmare-unsummoned').popover({ html: true, trigger: 'hover' });
-
-        const nightmare_key  = $nightmares_list[0].id;
-        nightmare_cookie[nightmare_key] = getNightmaresList($nightmares_list);
-        saveCookies(nightmare_cookie);
-        
-        // Clear Input and hide modal
-        $nightmare_selector.val('').trigger("chosen:updated");
-        $add_nightmare_modal.modal('hide');
-      });
-
-      first_modal_load = false;
-    }
+    saveCookie(cookie_nightmares, target_nightmare_list_id, $target_nightmare_list);
   });
 
   // On nightmare checkbox toggle, darken icon and disable popovers
   $body.on('change', '.nightmare-checkbox', function() {
     const $nightmare = $(this).closest('.nightmare');
-
-    if(this.checked) {
-      $nightmare.removeClass('nightmare-unsummoned').addClass('nightmare-summoned');
-    } else {
-      $nightmare.addClass('nightmare-unsummoned').removeClass('nightmare-summoned');
-    }
+    $nightmare.toggleClass('nightmare-unsummoned').toggleClass('nightmare-summoned');
 
     // Reinitialize popovers and destroy on summoned nightmares
     $('.nightmare-unsummoned').popover('enable');
@@ -119,30 +106,17 @@ $(function() {
     const encoded_nightmares = $import_nightmare_form_data.val();
     const decoded_nightmares = uriDecodeArray(encoded_nightmares.split(','));
 
-    // Reset all current nightmares
-    $nightmares_list.find('.nightmare').remove();
+    clearNightmareList($target_nightmare_list);
+    populateNightmaresList($target_nightmare_list, all_nightmares, decoded_nightmares);
+    saveCookie(cookie_nightmares, target_nightmare_list_id, $target_nightmare_list);
 
-    // Add nightmares
-    $.each(decoded_nightmares, function(_index, nightmare){
-      const [nightmare_name, summoner] = nightmare.split('::');
-      const $nightmare = generateNightmare(nightmares, nightmare_name, summoner);
-      $nightmares_list.append($nightmare);
-    });
-
-    // Save the cookie
-    nightmare_cookie[list_id] = getNightmaresList($nightmares_list);
-    saveCookies(nightmare_cookie);
-
+    $import_nightmare_form_data.val('');
     $import_nightmares_modal.modal('hide');
   });
 
-  $export_nightmares_button.click(function() {
-    list_id = $(this).data('list');
-  });
-
   // On nightmare export
-  $export_nightmares_modal.on('shown.bs.modal', function (e) {
-    const encoded_nightmares = uriEncodeArray(nightmare_cookie[list_id]);
+  $export_nightmares_modal.on('shown.bs.modal', function() {
+    const encoded_nightmares = uriEncodeArray(cookie_nightmares[target_nightmare_list_id]);
     $export_nightmare_data.html(encoded_nightmares.join(','));
   });
 
@@ -177,17 +151,27 @@ function getCookies() {
 };
 
 // Save cookies for page
-function saveCookies(cookies) {
-  $.each(cookies, function(key, nightmares) {
-    const encoded_nightmares = uriEncodeArray(nightmares);
-    document.cookie = `${key}=${encoded_nightmares.join(',')}`;
-  });
+function saveCookie(cookie_nightmares, target_nightmare_list_id, target_nightmare_list) {
+  cookie_nightmares[target_nightmare_list_id] = getNightmareList(target_nightmare_list);
+
+  const encoded_nightmares = uriEncodeArray(cookie_nightmares[target_nightmare_list_id]);
+  document.cookie = `${target_nightmare_list_id}=${encoded_nightmares.join(',')}`;
 };
 
+function populateNightmaresList(nightmares_list, all_nightmares, nightmares) {
+  $.each(nightmares, function(_index, nightmare){
+    const [nightmare_name, summoner] = nightmare.split('::');
+    const $nightmare = generateNightmare(all_nightmares, nightmare_name, summoner);
+    nightmares_list.append($nightmare);
+  });
+
+  $('.nightmare-unsummoned').popover({ html: true, trigger: 'hover' });
+}
+
 // Populates nightmares on the page using the cookie data
-function populateNightmares(nightmares, cookie_data) {
+function populateNightmares(all_nightmares, cookie_data) {
   $.each(cookie_data, function(key, cookie_nightmares) {
-    const $nightmares_list = $(`#${key}`);
+    const $target_nightmare_list = $(`#${key}`);
 
     if(cookie_nightmares.length == 1) {
       if(cookie_nightmares[0] == "") {
@@ -195,29 +179,28 @@ function populateNightmares(nightmares, cookie_data) {
       }
     }
 
-    $.each(cookie_nightmares, function(_index, cookie_nightmare) {
-      const [nightmare_name, summoner] = cookie_nightmare.split('::');
-      const $nightmare = generateNightmare(nightmares, nightmare_name, summoner);
-      $nightmares_list.append($nightmare);
-    });
-
-    $('.nightmare-unsummoned').popover({ html: true, trigger: 'hover' });
+    populateNightmaresList($target_nightmare_list, all_nightmares, cookie_nightmares);
   });
 };
 
 // Returns the list of current nightmares on the page for a section
-function getNightmaresList(nightmares_list) {
-  if(nightmares_list.length < 1) { return []; }
+function getNightmareList(nightmare_list) {
+  if(nightmare_list.length < 1) { return []; }
 
-  return $.map(nightmares_list.find('.nightmare'), function(nightmare, _index) {
+  return $.map(nightmare_list.find('.nightmare'), function(nightmare, _index) {
     const $nightmare = $(nightmare);
     return `${$nightmare.data('title')}::${$nightmare.find('.nightmare-summoner').val()}`;
   });
 }
 
+// Clear all nightmares in the list
+function clearNightmareList(nightmare_list) {
+  nightmare_list.find('.nightmare').remove();
+};
+
 // URI encode items in an array
 function uriEncodeArray(array) {
-  return $.map(array, function(nightmare, _index) {
+  return $.map(array, function(nightmare) {
     return encodeURIComponent(nightmare);
   });
 }
