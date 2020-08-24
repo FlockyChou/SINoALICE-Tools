@@ -11,7 +11,7 @@
     "duration_in_seconds": 0
   },
   "Disembodied Emil (L)": {
-    "image": "disembodied_emil_l.png",    
+    "image": "disembodied_emil_l.png",
     "effects": [
       "buff-patk" 
     ],  
@@ -20,6 +20,29 @@
     "sp_cost": 200,
     "charge_time_in_seconds": 70,
     "duration_in_seconds": 0
+  },
+
+  "Freeze Golem (SR)": {
+    "image": "freeze_golem_sr.png",
+    "effects": [
+      "water-only"
+    ],
+    "skill_name": "Aqueous Blessing (II)",
+    "description": "Greatly increases the effectiveness of allied Water skills.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 90,
+    "duration_in_seconds": 110
+  },
+  "Freeze Golem (L)": {
+    "image": "freeze_golem_l.png",
+    "effects": [
+      "water-only"
+    ],
+    "skill_name": "Aqueous Blessing (III)",
+    "description": "Massively increases the effectiveness of allied Water skills.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 80,
+    "duration_in_seconds": 120
   },
   "Girl (SR)": {
     "image": "girl_sr.png",
@@ -163,7 +186,68 @@
     "charge_time_in_seconds": 50,
     "duration_in_seconds": 0
   },
-
+  "Lindwyrm (SR)": {
+    "image": "lindwyrm_sr.png",
+    "effects": [
+      "wind-only"
+    ],
+    "skill_name": "Gale Blessing (II)",
+    "description": "Greatly increases the effectiveness of allied Wind skills.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 90,
+    "duration_in_seconds": 110
+  },
+  "Lindwyrm (L)": {
+    "image": "lindwyrm_l.png",
+    "effects": [
+      "wind-only"
+    ],
+    "skill_name": "Lindwyrm (III)",
+    "description": "Massively increases the effectiveness of allied Wind skills.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 80,
+    "duration_in_seconds": 120
+  },
+  "Noin, Sandstorm’s Mandate (SR)": {
+    "image": "noin_sandstorms_mandate_sr.png",
+    "effects": [],
+    "skill_name": "Hindering Wail (II)",
+    "description": "Greatly decreases the hit rate of all enemy Colosseum Support skills. *Effect ends early if two minutes or less remaining for Colosseum.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 60,
+    "duration_in_seconds": 90
+  },
+  "Noin, Sandstorm’s Mandate (L)": {
+    "image": "noin_sandstorms_mandate_l.png",
+    "effects": [],
+    "skill_name": "Hindering Wail (III)",
+    "description": "Massively decreases the hit rate of all enemy Colosseum Support skills. *Effect ends early if two minutes or less remaining for Colosseum.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 50,
+    "duration_in_seconds": 100
+  },
+  "Simone (SR)": {
+    "image": "simone_sr.png",
+    "effects": [
+      "sp-all"
+    ],   
+    "skill_name": "Fairy King Magic (I)",
+    "description": "Moderately reduce the SP cost of all allied skills.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 80,
+    "duration_in_seconds": 100
+  },
+  "Simone (L)": {
+    "image": "simone_l.png",
+    "effects": [
+      "sp-all"
+    ],
+    "skill_name": "Fairy King Magic (II)",
+    "description": "Greatly reduce the SP cost of all allied skills.",
+    "sp_cost": 200,
+    "charge_time_in_seconds": 70,
+    "duration_in_seconds": 110
+  },  
   "Solitary Black Rabbit (S)": {
     "image": "solitary_black_rabbit_s.png",
     "effects": [
@@ -211,5 +295,27 @@
     "sp_cost": 200,
     "charge_time_in_seconds": 50,
     "duration_in_seconds": 0
-  }    
+  },
+  "Ugallu (SR)": {
+    "image": "ugallu_sr.png",
+    "effects": [
+      "fire-only"
+    ],  
+    "skill_name": "Combustive Blessing (II)",
+    "description": "Greatly increases the effectiveness of allied Fire skills.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 90,
+    "duration_in_seconds": 110
+  },  
+  "Ugallu (L)": {
+    "image": "ugallu_l.png",
+    "effects": [
+      "fire-only"
+    ],
+    "skill_name": "Combustive Blessing (III)",
+    "description": "Massively increases the effectiveness of allied Fire skills.",
+    "sp_cost": 0,
+    "charge_time_in_seconds": 80,
+    "duration_in_seconds": 120
+  }
 }
