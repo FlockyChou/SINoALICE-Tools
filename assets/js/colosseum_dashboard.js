@@ -53,7 +53,7 @@ $(function() {
       saveCookie(cookie_nightmares, target_nightmare_list_id, $target_nightmare_list);
         
       // Clear Input and hide modal
-      $nightmare_selector.val('');
+      $nightmare_selector.val('').trigger('chosen:updated');
       $add_nightmare_modal.modal('hide');
     });
 
